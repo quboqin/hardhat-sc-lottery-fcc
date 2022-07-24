@@ -19,6 +19,7 @@ developmentChains.includes(network.name)
                   console.log("Setting up test...")
                   const startingTimeStamp = await raffle.getLastTimeStamp()
                   const accounts = await ethers.getSigners()
+                  let winnerStartingBalance
 
                   console.log("Setting up Listener...")
                   await new Promise(async (resolve, reject) => {
@@ -52,7 +53,7 @@ developmentChains.includes(network.name)
                       const tx = await raffle.enterRaffle({ value: raffleEntranceFee })
                       await tx.wait(1)
                       console.log("Ok, time to wait...")
-                      const winnerStartingBalance = await accounts[0].getBalance()
+                      winnerStartingBalance = await accounts[0].getBalance()
 
                       // and this code WONT complete until our listener has finished listening!
                   })
